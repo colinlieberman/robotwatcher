@@ -53,6 +53,6 @@ class WorkerReadingsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def worker_reading_params
-      params.fetch(:worker_reading, {})
+      params.require(:worker_reading).permit(:rate, :worker_id)
     end
 end

@@ -53,6 +53,6 @@ class PoolReadingsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def pool_reading_params
-      params.fetch(:pool_reading, {})
+      params.require(:pool_reading).permit(:user_rate, :workers)
     end
 end

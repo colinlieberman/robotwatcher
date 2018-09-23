@@ -1,0 +1,23 @@
+%h1 Listing worker_readings
+
+%table
+  %thead
+    %tr
+      %th Rate
+      %th Worker
+      %th
+      %th
+      %th
+
+  %tbody
+    - @worker_readings.each do |worker_reading|
+      %tr
+        %td= worker_reading.rate
+        %td= worker_reading.worker_id
+        %td= link_to 'Show', worker_reading
+        %td= link_to 'Edit', edit_worker_reading_path(worker_reading)
+        %td= link_to 'Destroy', worker_reading, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Worker reading', new_worker_reading_path

@@ -1,0 +1,16 @@
+= form_for @worker_reading do |f|
+  - if @worker_reading.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@worker_reading.errors.count, "error")} prohibited this worker_reading from being saved:"
+      %ul
+        - @worker_reading.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :rate
+    = f.text_field :rate
+  .field
+    = f.label :worker_id
+    = f.number_field :worker_id
+  .actions
+    = f.submit 'Save'

@@ -1,0 +1,23 @@
+%h1 Listing pool_readings
+
+%table
+  %thead
+    %tr
+      %th User rate
+      %th Workers
+      %th
+      %th
+      %th
+
+  %tbody
+    - @pool_readings.each do |pool_reading|
+      %tr
+        %td= pool_reading.user_rate
+        %td= pool_reading.workers
+        %td= link_to 'Show', pool_reading
+        %td= link_to 'Edit', edit_pool_reading_path(pool_reading)
+        %td= link_to 'Destroy', pool_reading, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Pool reading', new_pool_reading_path
