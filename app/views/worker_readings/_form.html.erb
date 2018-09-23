@@ -1,0 +1,17 @@
+<%= form_for(worker_reading) do |f| %>
+  <% if worker_reading.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(worker_reading.errors.count, "error") %> prohibited this worker_reading from being saved:</h2>
+
+      <ul>
+      <% worker_reading.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
