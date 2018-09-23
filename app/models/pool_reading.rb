@@ -1,0 +1,2 @@
+class PoolReading < ApplicationRecord
+end
