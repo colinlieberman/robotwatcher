@@ -7,5 +7,5 @@ rrdtool create robotwatcher.rrd \
   DS:Brahe:GAUGE:600:0:20 \
   DS:Sagan:GAUGE:600:0:20 \
   DS:workers:GAUGE:600:0:5 \
-  RRA:MAX:0.5:1:525960 \
-  RRA:AVERAGE:0.5:3600:525960
+  RRA:MAX:0.5:1:604800 \
+  RRA:AVERAGE:0.5:3600:168
