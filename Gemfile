@@ -12,7 +12,7 @@ gem 'sqlite3'
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-
+gem 'haml-rails'
 gem 'rrd-ruby'
 
 # Use jquery as the JavaScript library
