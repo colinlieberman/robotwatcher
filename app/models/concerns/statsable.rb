@@ -1,8 +1,9 @@
 module Statsable
   include ActiveSupport::Concern
   def pct_uptime_since(date)
-    minutes_up = self.where("rate > 0").where("created_at >= '#{date}'").count.to_f
-    total_minutes = self.where("created_at > '#{date}'").count.to_f
+    target = self.class.name == "Worker" ? self.worker_readings : self
+    minutes_up = target.where("rate > 0").where("created_at >= '#{date}'").count.to_f
+    total_minutes = target.where("created_at > '#{date}'").count.to_f
     number_format((minutes_up / total_minutes) * 100)
   end
 
