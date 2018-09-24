@@ -12,9 +12,11 @@ class Grapher
         -w 800 -h 400 \
  \
       DEF:rate=db/robotwatcher.rrd:#{field}:MAX \
-        DEF:mean_rate=db/robotwatcher.rrd:#{field}:AVERAGE \
-        LINE1:rate#FF0000:'total Thps' \
-        LINE2:mean_rate#0000FF:'mean Thps last hour'"
+      LINE1:rate#FF0000:'total Thps'"
+
+      # removing these lines until I fix running average
+      # DEF:mean_rate=db/robotwatcher.rrd:#{field}:AVERAGE \
+      # LINE2:mean_rate#0000FF:'mean Thps last hour'
 
         `#{rrd_cmd}`
         file_name
