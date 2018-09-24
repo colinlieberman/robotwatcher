@@ -16,6 +16,8 @@
 
 /db/*.rrd
 
+/app/assets/images/graphs/*.png
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
