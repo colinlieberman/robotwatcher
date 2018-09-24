@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180924003345) do
+ActiveRecord::Schema.define(version: 20180924010039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "pool_readings", force: :cascade do |t|
-    t.decimal  "user_rate"
+    t.decimal  "rate"
     t.integer  "workers"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
