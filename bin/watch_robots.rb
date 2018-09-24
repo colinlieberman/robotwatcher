@@ -52,7 +52,7 @@ cmd = "rrdtool update #{rrd_path} --template #{rrd_cmd} #{rrd_args}"
 # update psql
 db = PG.connect(host: ENV['DBHOST'], dbname: ENV['DBNAME'], user: ENV['DBUSER'], password: ENV['DBPASSWORD'])
 
-db.exec("INSERT INTO pool_readings (user_rate, workers, created_at, updated_at) 
+db.exec("INSERT INTO pool_readings (rate, workers, created_at, updated_at) 
   VALUES (#{total_rate}, #{n_workers}, NOW(), NOW())")
 
 workers.each do |name, data|
