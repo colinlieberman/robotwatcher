@@ -6,6 +6,16 @@ module Statsable
     number_format((minutes_up / total_minutes) * 100)
   end
 
+  def pct_uptime
+    minutes_up = target.where("rate > 0").count.to_f
+    total_minutes = target.count.to_f
+    number_format((minutes_up / total_minutes) * 100)
+  end
+
+  def current_rate
+    number_format target.order("created_at DESC").limit(1).first.rate
+  end
+
   def mean_since(date)
     number_format target.where("created_at >= '#{date}'").average(:rate)
   end
@@ -37,6 +47,6 @@ module Statsable
   end
 
   def target
-    @@target ||= self.class.name == "Worker" ? self.worker_readings : self
+    self.class.name == "Worker" ? self.worker_readings : self
   end
 end

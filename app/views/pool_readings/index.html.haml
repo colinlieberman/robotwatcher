@@ -1,9 +1,13 @@
 %h1 All Workers Total Thps
 .graph
-  = image_tag @graph_path
+  = image_tag PoolReading.graph
+.stats
+  = render "shared/stats", target: PoolReading
 
-- @workers.each do |name, path|
+- Worker.all.each do |worker|
   %h2
-    = name
+    = worker.name
   .graph
-    = image_tag path
+    = image_tag worker.graph
+  .stats
+    = render "shared/stats", target: worker
