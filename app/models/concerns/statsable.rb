@@ -40,11 +40,15 @@ module Statsable
     number_format target.where("created_at >= '#{date}'").maximum("rate")
   end
 
-  private
+  def all_since(time)
+    target.where("created_at >= '#{time}'")
+  end
 
   def number_format(val)
     val.round(2).to_f
   end
+
+  private
 
   def target
     self.class.name == "Worker" ? self.worker_readings : self

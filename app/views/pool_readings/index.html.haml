@@ -1,13 +1,22 @@
 %h1 All Workers Total Thps
 .graph
-  = image_tag PoolReading.graph
+  %canvas{id: "all-workers-chart"}
+  -# = image_tag PoolReading.graph
 .stats
   = render "shared/stats", target: PoolReading
+
+%h2 Workers Compared
+.graph
+  %canvas{id: "workers"}
 
 - Worker.all.each do |worker|
   %h2
     = worker.name
   .graph
-    = image_tag worker.graph
+    %canvas{id: "#{worker.name}-chart"}
+    -# = image_tag worker.graph
   .stats
     = render "shared/stats", target: worker
+
+:javascript
+  var Watcher = #{JSON.generate(chart_data).html_safe};

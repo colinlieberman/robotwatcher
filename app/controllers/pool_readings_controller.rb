@@ -1,3 +1,20 @@
 class PoolReadingsController < ApplicationController
-  before_action :set_pool_reading, only: [:show, :edit, :update, :destroy]
+  helper_method :chart_data
+
+  def chart_data
+    chart_data = {
+      pool_data: PoolReading::all_since(TimeHelper.day).map do |reading|
+        { rate: PoolReading::number_format(reading.rate),
+          time: reading.created_at.strftime("%Y-%m-%d %H:%I:%S") }
+      end,
+      workers: {}
+    }
+    Worker.all.each do |worker|
+      chart_data[:workers][worker.name] = worker.all_since(TimeHelper.day).map do |reading|
+        { rate: PoolReading::number_format(reading.rate),
+          time: reading.created_at.strftime("%Y-%m-%d %H:%I:%S") }
+      end
+    end
+    chart_data
+  end
 end
