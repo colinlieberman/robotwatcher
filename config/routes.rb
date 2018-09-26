@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # todo: factor this to own controller
+  root to: 'pool_readings#index'
+
   resources :pool_readings, only: :index
   resources :workers, only: :show
 
