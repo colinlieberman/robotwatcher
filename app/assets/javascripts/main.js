@@ -8,14 +8,48 @@ var chart_colors = {
   green: "rgb(0, 255, 0)"
 };
 
-function running_averages(data) {
+function trend_line(data) {
+  var trend = [];
+
+  /* make every point the running average of
+     the n points before it
+  */
+  var points_to_average =   30;
+  var current_counter = 0;
   var averages = [];
-  var sum = 0;
-  for(var i = 0; i < data.length; i++) {
-    sum += data[i].rate;
-    averages[i] = sum / (i+1);
+
+  /* initialize to zeros for ease later */
+  for(var j = 0; j < points_to_average; j++) {
+    averages[j] = 0;
   }
-  return averages;
+
+  for(var i = 0; i < data.length; i++) {
+    var rate = data[i].rate;
+
+    if(current_counter >= points_to_average) {
+      current_counter = 0;
+    }
+
+
+    if(i < points_to_average) {
+      trend[i] = null;
+      /* and fill the correct number holders */
+      for(var k = 0; k <= current_counter; k++) {
+        averages[k] += rate;
+      }
+      current_counter++;
+      continue;
+    }
+
+    for(var l = 0; l < points_to_average; l++) {
+      averages[l] += rate;
+    }
+
+    /* past n, so now start dumping vals */
+    trend[i] = averages[current_counter] / points_to_average;
+    averages[current_counter++] = 0;
+  }
+  return trend;
 }
 
 function init_chart(canvas, chart_data) {
@@ -27,12 +61,12 @@ function init_chart(canvas, chart_data) {
       datasets: [
         {
           borderColor: chart_colors.blue,
-          data: running_averages(chart_data),
+          data: trend_line(chart_data),
           fill: false,
           borderWidth: 2,
           pointBorderWidth: 0,
           pointRadius: 0,
-          label: "Running Average"
+          label: "30 Minutes Running Average"
         },
         {
           backgroundColor: chart_colors.red,
@@ -87,6 +121,13 @@ function init_charts() {
   });
 }
 
+function set_refresh() {
+  /* TODO: load data by xhr */
+  // init_charts();
+  // setTimeout(set_refresh, 60000);
+}
+
 $('document').ready(function() {
   init_charts();
+  set_refresh();
 });

@@ -1,6 +1,10 @@
 class PoolReadingsController < ApplicationController
   helper_method :chart_data
 
+  def index
+    @df = `ssh -p2222 tombstone -- "df -h"`
+  end
+
   def chart_data
     chart_data = {
       pool_data: PoolReading::all_since(TimeHelper.day).map do |reading|

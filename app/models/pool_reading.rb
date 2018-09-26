@@ -1,8 +1,7 @@
 class PoolReading < ApplicationRecord
+  default_scope { order(:created_at) }
+
   class <<self
     include Statsable
-    def graph
-      Grapher.day_graph "total", "Total Thps Among all Workers"
-    end
   end
 end

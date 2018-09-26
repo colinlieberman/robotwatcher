@@ -1,5 +1,6 @@
 module Statsable
   include ActiveSupport::Concern
+
   def pct_uptime_since(date)
     minutes_up = target.where("rate > 0").where("created_at >= '#{date}'").count.to_f
     total_minutes = target.where("created_at >= '#{date}'").count.to_f
@@ -45,6 +46,7 @@ module Statsable
   end
 
   def number_format(val)
+    return 0 unless val
     val.round(2).to_f
   end
 
