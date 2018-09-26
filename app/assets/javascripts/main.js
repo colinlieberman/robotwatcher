@@ -14,11 +14,11 @@ function set_stats(data_id, data) {
     var $row = $tbody.find('tr.' + row_class);
     for(var period in data[row_class]) {
       /* could be td or th */
-      var $cell = $row.find('.' + period);
       if(period == 'current') {
-        $cell.find('span.note').text('(Current: ' + data[row_class][period] + ' thps)');
+        $row.find('span.note').text('(Current: ' + data[row_class][period] + ' thps)');
       }
       else {
+        var $cell = $row.find('.' + period);
         $cell.text(data[row_class][period]);
       }
     }
