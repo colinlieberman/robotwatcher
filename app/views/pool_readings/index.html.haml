@@ -1,27 +1,33 @@
 .space
   %pre.df
 
-%h1 All Workers Total Thps
-.graph
-  %canvas{id: "all-workers-chart"}
-  -# = image_tag PoolReading.graph
-.graph
-  %canvas{id: "all-works-week"}
-.stats
-  = render "shared/stats", target: PoolReading
+.time
 
-%h2 Workers Compared
-.graph
-  %canvas{id: "workers"}
+.charts
+  .section
+    %h2 All Workers Total Thps
+    .graph
+      %canvas{id: "all-workers-chart"}
+      -# = image_tag PoolReading.graph
+    .graph
+      %canvas{id: "all-works-week"}
+    .stats
+      = render "shared/stats", target: PoolReading
 
-- Worker.all.each do |worker|
-  %h2
-    = worker.name
-  .graph
-    %canvas{id: "worker-#{worker.id}"}
-    -# = image_tag worker.graph
-  .stats
-    = render "shared/stats", target: worker
+  .section
+    %h2 Workers Compared
+    .graph
+      %canvas{id: "workers"}
+
+  - Worker.all.each do |worker|
+    .section
+      %h2
+        = worker.name
+      .graph
+        %canvas{id: "worker-#{worker.id}"}
+        -# = image_tag worker.graph
+      .stats
+        = render "shared/stats", target: worker
 
 :javascript
   var Watcher = #{JSON.generate(empty_watcher).html_safe};

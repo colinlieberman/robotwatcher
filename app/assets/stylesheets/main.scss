@@ -1,3 +1,38 @@
 h1, h2, .graph {
   text-align: center;
 }
+
+.space {
+  position: sticky;
+  position: -webkit-sticky;
+  display:inline-block;
+  float:right;
+  top: 0;
+  background-color: #000;
+  color: #0ff;
+  padding: 0 4px;
+}
+
+.time {
+  position: sticky;
+  position: -webkit-sticky;
+  display:inline-block;
+  top: 0;
+  background-color: #000;
+  color: #0ff;
+  padding: 0 4px;
+  font-size: 18px;
+}
+
+.charts {
+  width: 100%;
+  display: flex;
+  flex-flow: wrap;
+  .section {
+    width: 32%;
+  }
+}
+
+.graph {
+  width: 100%;
+}

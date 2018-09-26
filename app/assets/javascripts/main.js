@@ -107,6 +107,7 @@ function init_pool_charts() {
     success: function(data) {
       Watcher.pool_data = data;
       init_chart($('#all-workers-chart'), Watcher.pool_data);
+      $('.time').text("Last Reading: " + Watcher.pool_data[Watcher.pool_data.length-1].time);
     }
   });
 }
