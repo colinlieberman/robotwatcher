@@ -5,6 +5,10 @@ class WorkersController < ApplicationController
     end
   end
 
+  def stats
+    render json: worker::stats
+  end
+
   def chart_data
     worker::all_since(TimeHelper.day).map do |reading|
       { rate: PoolReading::number_format(reading.rate),
