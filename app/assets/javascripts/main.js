@@ -8,6 +8,23 @@ var chart_colors = {
   green: "rgb(0, 255, 0)"
 };
 
+function set_stats(data_id, data) {
+  var $tbody = $('.section[data-id="' + data_id + '"] .stats table.stats tbody');
+  for(var row_class in data) {
+    var $row = $tbody.find('tr.' + row_class);
+    for(var period in data[row_class]) {
+      /* could be td or th */
+      var $cell = $row.find('.' + period);
+      if(period == 'current') {
+        $cell.find('span.note').text('(Current: ' + data[row_class][period] + ' thps)');
+      }
+      else {
+        $cell.text(data[row_class][period]);
+      }
+    }
+  }
+}
+
 function trend_line(data) {
   var trend = [];
 
@@ -110,6 +127,12 @@ function init_pool_charts() {
       $('.time').text("Last Reading: " + Watcher.pool_data[Watcher.pool_data.length-1].time);
     }
   });
+  $.ajax('/pool_readings/stats', {
+    dataType: "json",
+    success: function(data) {
+      set_stats("all", data);
+    }
+  });
 }
 
 /* must be own function; if $.ajax is in
@@ -123,6 +146,12 @@ function init_worker_chart(id) {
     success: function(data) {
       Watcher.workers[id] = data;
       init_chart($('#worker-' + id), Watcher.workers[id]);
+    }
+  });
+  $.ajax('/workers/' + id + '/stats', {
+    dataType: "json",
+    success: function(data) {
+      set_stats(id, data);
     }
   });
 }
