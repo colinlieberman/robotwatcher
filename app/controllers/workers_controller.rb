@@ -8,7 +8,7 @@ class WorkersController < ApplicationController
   def chart_data
     worker::all_since(TimeHelper.day).map do |reading|
       { rate: PoolReading::number_format(reading.rate),
-        time: reading.created_at.strftime("%Y-%m-%d %H:%I:%S") }
+        time: reading.created_at.strftime("%Y-%m-%d %H:%M:%S") }
     end
   end
 
