@@ -63,7 +63,7 @@ function init_chart(canvas, chart_data) {
           borderColor: chart_colors.blue,
           data: trend_line(chart_data),
           fill: false,
-          borderWidth: 2,
+          borderWidth: 1,
           pointBorderWidth: 0,
           pointRadius: 0,
           label: "30 Minutes Running Average"
@@ -75,7 +75,7 @@ function init_chart(canvas, chart_data) {
           fill: false,
           label: "Thps",
           pointBorderWidth: 0,
-          pointRadius: 2,
+          pointRadius: 1,
         },
       ]
     },
