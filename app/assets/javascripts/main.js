@@ -101,33 +101,76 @@ function data_all_workers() {
   return datasets;
 }
 
-function init_charts() {
-  init_chart($('#all-workers-chart'), Watcher.pool_data);
-  for(var worker in Watcher.workers) {
-    init_chart($('#' + worker + '-chart'), Watcher.workers[worker]);
-  }
-
-  /* time stamps look like they line up pretty well, if
-     there are any problems I can fix that with how the
-     data is written
-  */
-  var workers_chart = new Chart($('#workers'), {
-    type: 'line',
-    data: {
-      labels: Watcher.workers.Brahe.map(function(d) { return d.time; }),
-      datasets: data_all_workers()
-    },
-    options: {}
+function init_pool_charts() {
+  $.ajax('/pool_readings', {
+    dataType: "json",
+    success: function(data) {
+      Watcher.pool_data = data;
+      init_chart($('#all-workers-chart'), Watcher.pool_data);
+    }
   });
 }
 
+/* must be own function; if $.ajax is in
+   same scope where the ids are found
+   (eg loop) then the last id eats all
+   the others when the callback is hit
+*/
+function init_worker_chart(id) {
+  $.ajax('/workers/' + id, {
+    dataType: "json",
+    success: function(data) {
+      Watcher.workers[id] = data;
+      init_chart($('#worker-' + id), Watcher.workers[id]);
+    }
+  });
+}
+
+function init_worker_charts() {
+  for(var worker_id in Watcher.workers) {
+    init_worker_chart(worker_id);
+   }
+}
+
+function init_df() {
+  $.ajax('/df', {
+    success: function(text) {
+      $('pre.df').text(text);
+    }
+  });
+}
+
+function init_all_workers_chart() {
+  /* wait a bit on initial load for other data to load */
+  setTimeout(function() {
+    /* time stamps look like they line up pretty well, if
+       there are any problems I can fix that with how the
+       data is written
+    */
+    var workers_chart = new Chart($('#workers'), {
+      type: 'line',
+      data: {
+        labels: Watcher.workers[1].map(function(d) { return d.time; }),
+        datasets: data_all_workers()
+      },
+      options: {}
+    });
+  }, 10000);
+}
+
+function init_charts() {
+  init_df();
+  init_pool_charts();
+  init_worker_charts();
+  init_all_workers_chart();
+}
+
 function set_refresh() {
-  /* TODO: load data by xhr */
-  // init_charts();
-  // setTimeout(set_refresh, 60000);
+  init_charts();
+  /* refresh every 10 minutes */
+  setTimeout(set_refresh, 600000);
 }
 
 $('document').ready(function() {
-  init_charts();
   set_refresh();
 });

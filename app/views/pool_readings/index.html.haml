@@ -1,11 +1,12 @@
 .space
-  %pre
-    = @df
+  %pre.df
 
 %h1 All Workers Total Thps
 .graph
   %canvas{id: "all-workers-chart"}
   -# = image_tag PoolReading.graph
+.graph
+  %canvas{id: "all-works-week"}
 .stats
   = render "shared/stats", target: PoolReading
 
@@ -17,10 +18,10 @@
   %h2
     = worker.name
   .graph
-    %canvas{id: "#{worker.name}-chart"}
+    %canvas{id: "worker-#{worker.id}"}
     -# = image_tag worker.graph
   .stats
     = render "shared/stats", target: worker
 
 :javascript
-  var Watcher = #{JSON.generate(chart_data).html_safe};
+  var Watcher = #{JSON.generate(empty_watcher).html_safe};
