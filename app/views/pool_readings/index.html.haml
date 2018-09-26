@@ -20,7 +20,7 @@
       %canvas{id: "workers"}
 
   - Worker.all.each do |worker|
-    .section
+    .section{"data-id": worker.id}
       %h2
         = worker.name
       .graph

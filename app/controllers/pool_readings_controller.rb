@@ -16,6 +16,10 @@ class PoolReadingsController < ApplicationController
     watcher
   end
 
+  def stats
+    render json: PoolReading::stats
+  end
+
   # really this should be its own controller, but I'm so lazy
   def df
     render text: `#{Rails.application.secrets.db_df_command}`

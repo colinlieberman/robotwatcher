@@ -13,65 +13,40 @@
     %tr.uptime
       %th.sname % Uptime
       %td.hour
-        = target.pct_uptime_since(TimeHelper.hour)
       %td.day
-        = target.pct_uptime_since(TimeHelper.day)
       %td.week
-        = target.pct_uptime_since(TimeHelper.week)
       %td.month
-        = target.pct_uptime_since(TimeHelper.month)
       %td.year
-        = target.pct_uptime_since(TimeHelper.year)
       %td.all_time
-        = target.pct_uptime
 
     %tr.tthps
       %th.sname
         Mean Thps
         %span.note
-          = "(current #{target.current_rate})"
       %td.hour
-        = target.mean_since(TimeHelper.hour)
       %td.day
-        = target.mean_since(TimeHelper.day)
       %td.week
-        = target.mean_since(TimeHelper.week)
       %td.month
-        = target.mean_since(TimeHelper.month)
       %td.year
-        = target.mean_since(TimeHelper.year)
       %td.all_time
-        = target.mean_all_time
 
     %tr.uthps
       %th.sname
         Mean Thps
         %span.net (during uptime)
       %td.hour
-        = target.uptime_mean_since(TimeHelper.hour)
       %td.day
-        = target.uptime_mean_since(TimeHelper.day)
       %td.week
-        = target.uptime_mean_since(TimeHelper.week)
       %td.month
-        = target.uptime_mean_since(TimeHelper.month)
       %td.year
-        = target.uptime_mean_since(TimeHelper.year)
       %td.all_time
-        = target.mean_all_uptime
 
     %tr.max
       %th.sname
         Max Thps
       %td.hour
-        = target.max_since(TimeHelper.hour)
       %td.day
-        = target.max_since(TimeHelper.day)
       %td.week
-        = target.max_since(TimeHelper.week)
       %td.month
-        = target.max_since(TimeHelper.month)
       %td.year
-        = target.max_since(TimeHelper.year)
       %td.all_time
-        = target.max_all_time

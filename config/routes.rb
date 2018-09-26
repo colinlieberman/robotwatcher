@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  resources :worker_readings
-  resources :pool_readings
-  resources :workers
+  resources :pool_readings, only: :index
+  resources :workers, only: :show
 
   get 'df', to: 'pool_readings#df'
+  get 'pool_readings/stats', to: 'pool_readings#stats'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
