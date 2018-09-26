@@ -16,8 +16,19 @@ class PoolReadingsController < ApplicationController
     watcher
   end
 
+  # really this should be its own controller, but I'm so lazy
   def df
-    render text: `ssh -p2222 tombstone -- "df -h"`
+    render text: `ssh -p#{db_ssh_port} #{db_ssh_host} -- "df -h"`
+  end
+
+  private
+
+  def db_ssh_port
+    Rails.application.secrets.db_host["ssh_port"]
+  end
+
+  def db_ssh_host
+    Rails.application.secrets.db_host["host"]
   end
 
   def chart_data
