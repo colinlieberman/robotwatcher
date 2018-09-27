@@ -6,6 +6,7 @@ var chart_colors = {
   teal: "rgb(0, 128, 255)",
   green: "rgb(0, 255, 0)",
   white: "rgb(255, 255, 255)",
+  yellow: "rgb(255, 255, 128)",
   red: "rgb(255, 0, 0)",
   blue: "rgb(0, 0, 255)",
   gray: "rgb(128, 128, 128)"
@@ -76,8 +77,8 @@ function init_chart(canvas, chart_data) {
       labels: chart_data.map(function(d) { return d.time; }),
       datasets: [
         {
-          backgroundColor: chart_colors.teal,
-          borderColor: chart_colors.teal,
+          backgroundColor: chart_colors.yellow,
+          borderColor: chart_colors.yellow,
           data: trend_line(chart_data),
           fill: false,
           borderWidth: 1,
