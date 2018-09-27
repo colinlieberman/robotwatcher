@@ -21,7 +21,7 @@ function set_stats(data_id, data) {
       $cell.text(data[row_class][period]);
     }
   }
-  $section.find('.current').text('(' + data.tthps.current + ' thps)');
+  $section.find('.current').text('(' + data.tthps.current + ' now; '+ data.tthps.day + ' day)');
 }
 
 function trend_line(data) {
