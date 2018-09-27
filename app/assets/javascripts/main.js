@@ -12,20 +12,16 @@ var chart_colors = {
 };
 
 function set_stats(data_id, data) {
-  var $tbody = $('.section[data-id="' + data_id + '"] .stats table.stats tbody');
+  var $section = $('.section[data-id="' + data_id + '"]');
+  var $tbody = $section.find('.stats table.stats tbody');
   for(var row_class in data) {
     var $row = $tbody.find('tr.' + row_class);
     for(var period in data[row_class]) {
-      /* could be td or th */
-      if(period == 'current') {
-        $row.find('span.note').text('(Current: ' + data[row_class][period] + ' thps)');
-      }
-      else {
-        var $cell = $row.find('.' + period);
-        $cell.text(data[row_class][period]);
-      }
+      var $cell = $row.find('.' + period);
+      $cell.text(data[row_class][period]);
     }
   }
+  $section.find('.current').text('(' + data.tthps.current + ' thps)');
 }
 
 function trend_line(data) {
@@ -109,13 +105,13 @@ function data_all_workers() {
   var colors = Object.keys(chart_colors);
   var datasets = [];
   var color_i = 0;
-  for(var worker in Watcher.workers)  {
+  for(var worker_id in Watcher.workers)  {
     datasets.push( {
       borderColor: chart_colors[colors[color_i]],
       backgroundColor: chart_colors[colors[color_i++]],
-      data: Watcher.workers[worker].map(function(d) { return d.rate; }),
+      data: Watcher.workers[worker_id].map(function(d) { return d.rate; }),
       fill: false,
-      label: worker,
+      label: Workers[worker_id],
       borderWidth: 1,
       pointBorderWidth: 0,
       pointRadius: 0,

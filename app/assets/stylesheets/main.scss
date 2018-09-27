@@ -3,7 +3,7 @@ body {
   color: #0ff;
 }
 
-h1, h2, .graph {
+h1, h2, .graph, .time {
   text-align: center;
 }
 
@@ -24,7 +24,7 @@ table.stats {
   margin: auto;
 }
 
-.time {
+.top-time {
   position: sticky;
   position: -webkit-sticky;
   display:inline-block;

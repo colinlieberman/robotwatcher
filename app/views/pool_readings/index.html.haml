@@ -1,11 +1,14 @@
 .space
   %pre.df
 
-.time
+.time.top-time
 
 .charts
   .section{"data-id": "all"}
-    %h2 All Workers Total Thps
+    %h1
+      All Workers Total Thps
+      %span.current
+    .time
     .graph
       %canvas{id: "all-workers-chart", style: "height: 600px;"}
       -# = image_tag PoolReading.graph
@@ -15,14 +18,18 @@
       = render "shared/stats", target: PoolReading
 
   .section
-    %h2 Workers Compared
+    %h1
+      Workers Compared
+    .time
     .graph
       %canvas{id: "workers", style: "height: 600px;"}
 
   - Worker.all.each do |worker|
     .section{"data-id": worker.id}
-      %h2
+      %h1
         = worker.name
+        %span.current
+      .time
       .graph
         %canvas{id: "worker-#{worker.id}", style: "height: 600px;"}
         -# = image_tag worker.graph
@@ -31,3 +38,4 @@
 
 :javascript
   var Watcher = #{JSON.generate(empty_watcher).html_safe};
+  var Workers = #{JSON.generate(Worker.all.pluck(:id, :name).to_h).html_safe}
