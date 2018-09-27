@@ -5,8 +5,7 @@
   .section{"data-id": "all"}
     %h1
       All Workers
-      %br
-      %span.current
+      .current
     .time
     .graph
       %canvas{id: "all-workers-chart", style: "height: 600px;"}
@@ -27,7 +26,7 @@
     .section{"data-id": worker.id}
       %h1
         = worker.name
-        %span.current
+        .current
       .time
       .graph
         %canvas{id: "worker-#{worker.id}", style: "height: 600px;"}

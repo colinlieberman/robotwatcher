@@ -245,8 +245,14 @@ function set_carousel() {
   }, 15000);
 }
 
+function init_refresh() {
+  init_charts();
+  /* refresh every 10 minutes */
+  setTimeout(init_refresh, 60000);
+}
+
 $('document').ready(function() {
   Chart.defaults.global.defaultFontColor = chart_colors.gray;
-  init_charts();
+  init_refresh();
   set_carousel();
 });

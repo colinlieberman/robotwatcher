@@ -7,13 +7,19 @@ body {
   display: none;
 }
 
-h1, h2, .graph, .time {
+h1, h2, .graph, .time, .current {
   text-align: center;
 }
 
 .space {
   /* looks terrible on my machine; but good on the large display */
   position: absolute;
+}
+
+div.stats {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .time {
