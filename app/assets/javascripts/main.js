@@ -1,11 +1,14 @@
 "use strict";
 
 var chart_colors = {
-  red: "rgb(255, 0, 0)",
-  blue: "rgb(0, 0, 255)",
+  pink: "rgb(255, 128, 128)",
   orange: "rgb(255, 128, 0)",
   teal: "rgb(0, 128, 255)",
-  green: "rgb(0, 255, 0)"
+  green: "rgb(0, 255, 0)",
+  white: "rgb(255, 255, 255)",
+  red: "rgb(255, 0, 0)",
+  blue: "rgb(0, 0, 255)",
+  gray: "rgb(128, 128, 128)"
 };
 
 function set_stats(data_id, data) {
@@ -77,7 +80,8 @@ function init_chart(canvas, chart_data) {
       labels: chart_data.map(function(d) { return d.time; }),
       datasets: [
         {
-          borderColor: chart_colors.blue,
+          backgroundColor: chart_colors.teal,
+          borderColor: chart_colors.teal,
           data: trend_line(chart_data),
           fill: false,
           borderWidth: 1,
@@ -86,7 +90,8 @@ function init_chart(canvas, chart_data) {
           label: "30 Minutes Running Average"
         },
         {
-          backgroundColor: chart_colors.red,
+          backgroundColor: chart_colors.pink,
+          borderColor: chart_colors.pink,
           showLine: false,
           data: chart_data.map(function(d) { return d.rate; }),
           fill: false,
@@ -96,7 +101,7 @@ function init_chart(canvas, chart_data) {
         },
       ]
     },
-    options: {}
+    options: chart_options()
   });
 }
 
@@ -106,7 +111,8 @@ function data_all_workers() {
   var color_i = 0;
   for(var worker in Watcher.workers)  {
     datasets.push( {
-      borderColor: chart_colors[colors[color_i++]],
+      borderColor: chart_colors[colors[color_i]],
+      backgroundColor: chart_colors[colors[color_i++]],
       data: Watcher.workers[worker].map(function(d) { return d.rate; }),
       fill: false,
       label: worker,
@@ -183,9 +189,29 @@ function init_all_workers_chart() {
         labels: Watcher.workers[1].map(function(d) { return d.time; }),
         datasets: data_all_workers()
       },
-      options: {}
+      options: chart_options()
     });
   }, 10000);
+}
+
+function chart_options() {
+  return {
+    responsive: false,
+    scales: {
+      xAxes: [{
+        display: true,
+        gridLines: {
+          color: chart_colors.gray
+        }
+      }],
+      yAxes: [{
+        display: true,
+        gridLines: {
+          color: chart_colors.gray
+        }
+      }]
+    }
+  };
 }
 
 function init_charts() {
@@ -202,5 +228,6 @@ function set_refresh() {
 }
 
 $('document').ready(function() {
+  Chart.defaults.global.defaultFontColor = chart_colors.gray;
   set_refresh();
 });

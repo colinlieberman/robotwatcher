@@ -1,5 +1,14 @@
+body {
+  background-color: #000;
+  color: #0ff;
+}
+
 h1, h2, .graph {
   text-align: center;
+}
+
+.section {
+  margin-top: 300px;
 }
 
 .space {
@@ -8,9 +17,11 @@ h1, h2, .graph {
   display:inline-block;
   float:right;
   top: 0;
-  background-color: #000;
-  color: #0ff;
   padding: 0 4px;
+}
+
+table.stats {
+  margin: auto;
 }
 
 .time {
@@ -18,21 +29,10 @@ h1, h2, .graph {
   position: -webkit-sticky;
   display:inline-block;
   top: 0;
-  background-color: #000;
-  color: #0ff;
   padding: 0 4px;
   font-size: 18px;
 }
 
-.charts {
-  width: 100%;
-  display: flex;
-  flex-flow: wrap;
-  .section {
-    width: 32%;
-  }
-}
-
-.graph {
-  width: 100%;
+canvas {
+  margin: auto;
 }

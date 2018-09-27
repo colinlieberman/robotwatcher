@@ -7,24 +7,24 @@
   .section{"data-id": "all"}
     %h2 All Workers Total Thps
     .graph
-      %canvas{id: "all-workers-chart"}
+      %canvas{id: "all-workers-chart", style: "height: 600px;"}
       -# = image_tag PoolReading.graph
-    .graph
-      %canvas{id: "all-works-week"}
+    -# .graph
+    -#   %canvas{id: "all-works-week", style: "height: 600px;"}
     .stats
       = render "shared/stats", target: PoolReading
 
   .section
     %h2 Workers Compared
     .graph
-      %canvas{id: "workers"}
+      %canvas{id: "workers", style: "height: 600px;"}
 
   - Worker.all.each do |worker|
     .section{"data-id": worker.id}
       %h2
         = worker.name
       .graph
-        %canvas{id: "worker-#{worker.id}"}
+        %canvas{id: "worker-#{worker.id}", style: "height: 600px;"}
         -# = image_tag worker.graph
       .stats
         = render "shared/stats", target: worker
