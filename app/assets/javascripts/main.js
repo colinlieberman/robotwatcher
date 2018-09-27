@@ -223,7 +223,25 @@ function set_refresh() {
   setTimeout(set_refresh, 600000);
 }
 
+function set_carousel() {
+  var $sections = $('.section');
+  var n_sections = $sections.length;
+  var curr_section = 1; /* start going to second section */
+
+  var rotate_section = function() {
+    $sections[curr_section++].scrollIntoView();
+    if(curr_section == n_sections) {
+      curr_section = 0;
+    }
+    setTimeout(rotate_section, 60000);
+  };
+
+  /* pause for data to load */
+  setTimeout(rotate_section, 10000);
+}
+
 $('document').ready(function() {
   Chart.defaults.global.defaultFontColor = chart_colors.gray;
   set_refresh();
+  set_carousel();
 });
