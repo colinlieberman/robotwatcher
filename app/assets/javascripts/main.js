@@ -1,8 +1,8 @@
 "use strict";
 
 var chart_colors = {
-  pink: "rgb(255, 128, 128)",
-  orange: "rgb(255, 128, 0)",
+  pink: "rgb(255, 180, 200)",
+  orange: "rgb(255, 180, 0)",
   teal: "rgb(0, 128, 255)",
   green: "rgb(0, 255, 0)",
   white: "rgb(255, 255, 255)",
@@ -227,18 +227,24 @@ function set_refresh() {
 function set_carousel() {
   var $sections = $('.section');
   var n_sections = $sections.length;
-  var curr_section = 1; /* start going to second section */
+  var curr_section = 0;
 
   var rotate_section = function() {
-    $sections[curr_section++].scrollIntoView();
+    // $sections[curr_section++].scrollIntoView();
+    $($sections[curr_section++]).hide();
+    $($sections[curr_section]).show();
     if(curr_section == n_sections) {
       curr_section = 0;
     }
-    setTimeout(rotate_section, 60000);
+    setTimeout(rotate_section, 15000);
   };
 
-  /* pause for data to load */
-  setTimeout(rotate_section, 10000);
+  /* pause for data to load, then hide everything */
+  setTimeout(function() {
+    $sections.hide();
+    $sections.first().show();
+    rotate_section();
+  }, 15000);
 }
 
 $('document').ready(function() {
