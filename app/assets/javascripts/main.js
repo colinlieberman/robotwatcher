@@ -248,7 +248,7 @@ function set_carousel() {
 function init_refresh() {
   init_charts();
   /* refresh every 10 minutes */
-  setTimeout(init_refresh, 60000);
+  setTimeout(init_refresh, 600000);
 }
 
 $('document').ready(function() {
