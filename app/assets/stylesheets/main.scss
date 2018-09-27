@@ -3,6 +3,10 @@ body {
   color: #0ff;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 h1, h2, .graph, .time {
   text-align: center;
 }
