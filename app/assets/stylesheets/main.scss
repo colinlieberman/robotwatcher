@@ -11,6 +11,11 @@ h1, h2, .graph, .time {
   text-align: center;
 }
 
+.space {
+  /* looks terrible on my machine; but good on the large display */
+  position: absolute;
+}
+
 .time {
   font-size: 48px;
 }
