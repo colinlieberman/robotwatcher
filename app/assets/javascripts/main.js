@@ -169,6 +169,8 @@ function init_df() {
   $.ajax('/df', {
     success: function(text) {
       $('pre.df').text(text);
+      /* refresh every 10 minutes */
+      setTimeout(init_df, 600000);
     }
   });
 }
