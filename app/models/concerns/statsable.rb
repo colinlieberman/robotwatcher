@@ -42,7 +42,7 @@ module Statsable
   end
 
   def all_since(time)
-    target.where("created_at >= '#{time}'")
+    target.ordered.where("created_at >= '#{time}'")
   end
 
   def number_format(val)

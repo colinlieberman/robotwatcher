@@ -1,8 +1,6 @@
 class WorkersController < ApplicationController
   def show
-    respond_to do |format|
-      format.json { render json: chart_data }
-    end
+    render json: chart_data
   end
 
   def stats

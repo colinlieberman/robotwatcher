@@ -1,5 +1,5 @@
 class PoolReading < ApplicationRecord
-  default_scope { order(:created_at) }
+  scope :ordered, -> { order(:created_at) }
 
   class <<self
     include Statsable
