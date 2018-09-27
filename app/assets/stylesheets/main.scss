@@ -7,30 +7,20 @@ h1, h2, .graph, .time {
   text-align: center;
 }
 
-.section {
-  padding-top: 100px;
+.time {
+  font-size: 48px;
 }
 
-.space {
-  position: sticky;
-  position: -webkit-sticky;
-  display:inline-block;
-  float:right;
-  top: 0;
-  padding: 0 4px;
+h1 {
+  font-size: 64px;
+}
+
+.section {
+  padding-top: 20px;
 }
 
 table.stats {
   margin: auto;
-}
-
-.top-time {
-  position: sticky;
-  position: -webkit-sticky;
-  display:inline-block;
-  top: 0;
-  padding: 0 4px;
-  font-size: 18px;
 }
 
 canvas {
