@@ -255,4 +255,9 @@ $('document').ready(function() {
   Chart.defaults.global.defaultFontColor = chart_colors.gray;
   init_refresh();
   set_carousel();
+
+  /* something's crapping everything out, chart js and all the datapoints, maybe?
+     reload the whole show every hour
+  */
+  setTimeout(function() { window.location = window.location; }, 3600000);
 });
