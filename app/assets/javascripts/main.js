@@ -69,7 +69,7 @@ function trend_line(data) {
     }
 
     /* past n, so now start dumping vals */
-    trend[i] = averages[current_counter] / points_to_average;
+    trend[i] = (averages[current_counter] / points_to_average).toFixed(2);
     averages[current_counter++] = 0;
   }
   return trend;
