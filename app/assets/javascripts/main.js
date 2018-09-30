@@ -265,5 +265,5 @@ $('document').ready(function() {
   /* something's crapping everything out, chart js and all the datapoints, maybe?
      reload the whole show every hour
   */
-  setTimeout(function() { window.location = window.location; }, 3600000);
+  setTimeout(function() { window.location.reload(true); }, 360000);
 });
