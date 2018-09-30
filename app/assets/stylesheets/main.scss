@@ -1,6 +1,19 @@
 body {
   background-color: #000;
   color: #0ff;
+  position: relative;
+}
+
+.summary {
+  position: absolute;
+  top: 50%;
+  transform: translatY(-50%);
+}
+
+tbody {
+  th {
+    text-align: right;
+  }
 }
 
 ::-webkit-scrollbar {

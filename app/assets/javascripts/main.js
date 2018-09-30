@@ -13,16 +13,22 @@ var chart_colors = {
 };
 
 function set_stats(data_id, data) {
+  /* set both worker stats and summary */
   var $section = $('.section[data-id="' + data_id + '"]');
-  var $tbody = $section.find('.stats table.stats tbody');
+  var $worker_tbody = $section.find('.stats table.stats tbody');
   for(var row_class in data) {
-    var $row = $tbody.find('tr.' + row_class);
+    var $row = $worker_tbody.find('tr.' + row_class);
     for(var period in data[row_class]) {
       var $cell = $row.find('.' + period);
       $cell.text(data[row_class][period]);
     }
   }
   $section.find('.current').text('(' + data.tthps.current + ' now; '+ data.tthps.day + ' day)');
+
+  var $summary_row  = $('.summary tbody tr[data-id="' + data_id + '"]')
+  $summary_row.find('td.now').text(data.tthps.current);
+  $summary_row.find('td.day').text(data.tthps.day);
+  $summary_row.find('td.uptime').text(data.uptime.day);
 }
 
 function trend_line(data) {
@@ -190,7 +196,7 @@ function init_all_workers_chart() {
       },
       options: chart_options()
     });
-  }, 10000);
+  }, 3000);
 }
 
 function chart_options() {
@@ -234,7 +240,7 @@ function set_carousel() {
     }
 
     $($sections[curr_section]).show();
-    setTimeout(rotate_section, 15000);
+    setTimeout(rotate_section, 5000);
   };
 
   /* pause for data to load, then hide everything */
@@ -242,7 +248,7 @@ function set_carousel() {
     $sections.hide();
     $sections.first().show();
     rotate_section();
-  }, 15000);
+  }, 5000);
 }
 
 function init_refresh() {

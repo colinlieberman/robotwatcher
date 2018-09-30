@@ -2,6 +2,7 @@ class PoolReadingsController < ApplicationController
   helper_method :empty_watcher
 
   def index
+    @workers = Worker.all
     respond_to do |format|
       format.html
       format.json { render json: chart_data }

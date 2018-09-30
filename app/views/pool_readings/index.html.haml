@@ -1,6 +1,28 @@
 .space
   %pre.df
 
+.summary
+  %table
+    %thead
+      %tr
+        %th
+        %th Thps Now
+        %th Thps Day
+        %th Uptime Day
+    %tbody
+      - @workers.each do |worker|
+        %tr{'data-id': worker.id}
+          %th
+            = worker.name
+          %td.now
+          %td.day
+          %td.uptime
+      %tr{'data-id': 'all'}
+        %th All
+        %td.now
+        %td.day
+        %td.uptime
+
 .charts
   .section{"data-id": "all"}
     %h1
@@ -22,7 +44,7 @@
     .graph
       %canvas{id: "workers", style: "height: 600px;"}
 
-  - Worker.all.each do |worker|
+  - @workers.each do |worker|
     .section{"data-id": worker.id}
       %h1
         = worker.name
@@ -36,4 +58,4 @@
 
 :javascript
   var Watcher = #{JSON.generate(empty_watcher).html_safe};
-  var Workers = #{JSON.generate(Worker.all.pluck(:id, :name).to_h).html_safe}
+  var Workers = #{JSON.generate(@workers.pluck(:id, :name).to_h).html_safe}
