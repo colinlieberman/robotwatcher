@@ -259,6 +259,7 @@ function init_refresh() {
 
 $('document').ready(function() {
   Chart.defaults.global.defaultFontColor = chart_colors.gray;
+  Chart.defaults.global.defaultFontSize  = 24;
   init_refresh();
   set_carousel();
 

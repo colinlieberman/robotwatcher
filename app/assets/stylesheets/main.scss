@@ -7,11 +7,14 @@ body {
 .summary {
   position: absolute;
   top: 50%;
-  transform: translatY(-50%);
+  transform: translateY(-50%);
+  th, td {
+    font-size: 24px;
+  }
 }
 
 tbody {
-  th {
+  th, td {
     text-align: right;
   }
 }

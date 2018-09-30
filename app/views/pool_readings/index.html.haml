@@ -8,7 +8,10 @@
         %th
         %th Thps Now
         %th Thps Day
-        %th Uptime Day
+        %th
+          Uptime
+          %br
+          Day
     %tbody
       - @workers.each do |worker|
         %tr{'data-id': worker.id}
