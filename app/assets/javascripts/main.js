@@ -112,11 +112,23 @@ function data_all_workers() {
   var colors = Object.keys(chart_colors);
   var datasets = [];
   var color_i = 0;
+  var data_points;
+
   for(var worker_id in Watcher.workers)  {
+    var worker = Watcher.workers[worker_id]
+    data_points = [];
+
+    for(var i in worker) {
+      /* every 10th item */
+      if( i % 10 == 0) {
+        data_points.push(worker[i]);
+      }
+    }
+
     datasets.push( {
       borderColor: chart_colors[colors[color_i]],
       backgroundColor: chart_colors[colors[color_i++]],
-      data: Watcher.workers[worker_id].map(function(d) { return d.rate; }),
+      data: data_points.map(function(d) {return d.rate;} ),
       fill: false,
       label: Workers[worker_id],
       borderWidth: 1,
@@ -124,7 +136,14 @@ function data_all_workers() {
       pointRadius: 0,
     });
   }
-  return datasets;
+
+  /* use the last iteration of data */
+  var labels = data_points.map(function(d) {return d.time;} );
+
+  return {
+    datasets: datasets,
+    labels: labels
+  };
 }
 
 function init_pool_charts() {
@@ -188,11 +207,12 @@ function init_all_workers_chart() {
        there are any problems I can fix that with how the
        data is written
     */
+    var datasets = data_all_workers();
     var workers_chart = new Chart($('#workers'), {
       type: 'line',
       data: {
-        labels: Watcher.workers[1].map(function(d) { return d.time; }),
-        datasets: data_all_workers()
+        labels: datasets.labels,
+        datasets: datasets.datasets
       },
       options: chart_options()
     });
