@@ -55,6 +55,8 @@
       .time
       .graph
         %canvas{id: "worker-#{worker.id}", style: "height: 600px;"}
+      .stats
+        = render "shared/stats", target: worker
 
     .section.month{"data-id": "#{worker.id}-month"}
       %h1
@@ -62,10 +64,7 @@
         %br
         Past Month
       .graph
-        %canvas{id: "worker-#{worker.id}-month", style: "height: 400px;"}
-
-      .stats
-        = render "shared/stats", target: worker
+        %canvas{id: "worker-#{worker.id}-month", style: "height: 600px;"}
 
 :javascript
   var Watcher = #{JSON.generate(empty_watcher).html_safe};
