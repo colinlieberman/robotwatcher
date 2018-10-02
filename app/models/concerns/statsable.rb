@@ -90,4 +90,8 @@ module Statsable
   def target
     self.class.name == "Worker" ? self.worker_readings : self
   end
+
+  def con
+    ActiveRecord::Base.connection.raw_connection
+  end
 end

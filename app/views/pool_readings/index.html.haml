@@ -55,7 +55,15 @@
       .time
       .graph
         %canvas{id: "worker-#{worker.id}", style: "height: 600px;"}
-        -# = image_tag worker.graph
+
+    .section{"data-id": "#{worker.id}-month"}
+      %h1
+        = worker.name
+        %br
+        Past Month
+      .graph
+        %canvas{id: "worker-#{worker.id}-month", style: "height: 600px;"}
+
       .stats
         = render "shared/stats", target: worker
 

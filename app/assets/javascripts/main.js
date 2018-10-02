@@ -77,32 +77,38 @@ function trend_line(data) {
 
 function init_chart(canvas, chart_data) {
   var charts = {};
+  var datasets = [];
+
+  if(chart_data.length > 600) {
+    datasets.push(  {
+      backgroundColor: chart_colors.yellow,
+      borderColor: chart_colors.yellow,
+      data: trend_line(chart_data),
+      fill: false,
+      borderWidth: 1,
+      pointBorderWidth: 0,
+      pointRadius: 0,
+      label: "30 Minutes Running Average"
+    });
+  }
+
+  datasets.push(        {
+    backgroundColor: chart_colors.pink,
+    borderColor: chart_colors.pink,
+    /* hack, if it's a month chart, test by data size */
+    showLine: chart_data.length > 30 ? false : true,
+    data: chart_data.map(function(d) { return parseFloat(d.rate); }),
+    fill: false,
+    label: "Thps",
+    pointBorderWidth: 0,
+    pointRadius: 1,
+  });
+
   charts["total"] = new Chart(canvas, {
     type: 'line',
     data: {
       labels: chart_data.map(function(d) { return d.time; }),
-      datasets: [
-        {
-          backgroundColor: chart_colors.yellow,
-          borderColor: chart_colors.yellow,
-          data: trend_line(chart_data),
-          fill: false,
-          borderWidth: 1,
-          pointBorderWidth: 0,
-          pointRadius: 0,
-          label: "30 Minutes Running Average"
-        },
-        {
-          backgroundColor: chart_colors.pink,
-          borderColor: chart_colors.pink,
-          showLine: false,
-          data: chart_data.map(function(d) { return d.rate; }),
-          fill: false,
-          label: "Thps",
-          pointBorderWidth: 0,
-          pointRadius: 1,
-        },
-      ]
+      datasets: datasets
     },
     options: chart_options()
   });
@@ -172,8 +178,9 @@ function init_worker_chart(id) {
   $.ajax('/workers/' + id, {
     dataType: "json",
     success: function(data) {
-      Watcher.workers[id] = data;
+      Watcher.workers[id] = data.all;
       init_chart($('#worker-' + id), Watcher.workers[id]);
+      init_chart($('#worker-' + id + '-month'), data.month)
     }
   });
   $.ajax('/workers/' + id + '/stats', {
