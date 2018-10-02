@@ -114,7 +114,7 @@ function init_chart(canvas, chart_data) {
   });
 }
 
-function data_  all_workers() {
+function data_all_workers() {
   var colors = Object.keys(chart_colors);
   var datasets = [];
   var color_i = 0;
