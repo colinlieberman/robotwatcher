@@ -114,7 +114,7 @@ function init_chart(canvas, chart_data) {
   });
 }
 
-function data_all_workers() {
+function data_  all_workers() {
   var colors = Object.keys(chart_colors);
   var datasets = [];
   var color_i = 0;
@@ -223,7 +223,7 @@ function init_all_workers_chart() {
       },
       options: chart_options()
     });
-  }, 3000);
+  }, 10000);
 }
 
 function chart_options() {
