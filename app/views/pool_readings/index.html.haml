@@ -1,34 +1,34 @@
-.space.card
-  %pre.df
-
-.summary.card
-  %table
-    %thead
-      %tr
-        %th
-        %th Thps Now
-        %th Thps Day
-        %th
-          Uptime
-          %br
-          Day
-    %tbody
-      - @workers.each do |worker|
-        %tr{'data-id': worker.id}
-          %th
-            = worker.name
-          %td.now
-          %td.day
-          %td.uptime
-      %tr{'data-id': 'all'}
-        %th All
-        %td.now
-        %td.day
-        %td.uptime
-
-.section.card{"data-id": "all"}
-  .stats
-    = render "shared/stats", target: PoolReading
+-# .space.card
+-#   %pre.df
+-#
+-# .summary.card
+-#   %table
+-#     %thead
+-#       %tr
+-#         %th
+-#         %th Thps Now
+-#         %th Thps Day
+-#         %th
+-#           Uptime
+-#           %br
+-#           Day
+-#     %tbody
+-#       - @workers.each do |worker|
+-#         %tr{'data-id': worker.id}
+-#           %th
+-#             = worker.name
+-#           %td.now
+-#           %td.day
+-#           %td.uptime
+-#       %tr{'data-id': 'all'}
+-#         %th All
+-#         %td.now
+-#         %td.day
+-#         %td.uptime
+-#
+-# .section.card{"data-id": "all"}
+-#   .stats
+-#     = render "shared/stats", target: PoolReading
 
 .section.card{"data-id": "all"}
   %h1
@@ -49,21 +49,24 @@
     %canvas{id: "workers"}
 
 - @workers.each do |worker|
-  .worker.card
+  .worker.card{"data-id": worker.id}
     %h1
       = worker.name
       .current
     .time
-    .section{"data-id": worker.id}
-      .graph
-        %canvas{id: "worker-#{worker.id}"}
+    .graphs
+      .section{"data-id": worker.id}
+        .graph
+          %h2 Day
+          %canvas{id: "worker-#{worker.id}"}
 
-    .section.month{"data-id": "#{worker.id}-month"}
-      .graph
-        %canvas{id: "worker-#{worker.id}-month"}
+      .section.month{"data-id": "#{worker.id}-month"}
+        .graph
+          %h2 Month
+          %canvas{id: "worker-#{worker.id}-month"}
 
-    .stats
-      = render "shared/stats", target: worker
+    -# .stats
+    -#   = render "shared/stats", target: worker
 
 :javascript
   var Watcher = #{JSON.generate(empty_watcher).html_safe};

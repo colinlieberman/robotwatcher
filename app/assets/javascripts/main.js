@@ -107,7 +107,7 @@ function init_chart(canvas, chart_data) {
   charts["total"] = new Chart(canvas, {
     type: 'line',
     data: {
-      labels: chart_data.map(function(d) { return d.time; }),
+      labels: chart_data.map(function(d) { return /*d.time*/ ""; }),
       datasets: datasets
     },
     options: chart_options()
@@ -144,7 +144,7 @@ function data_all_workers() {
   }
 
   /* use the last iteration of data */
-  var labels = data_points.map(function(d) {return d.time;} );
+  var labels = data_points.map(function(d) {return /*d.time*/ "";} );
 
   return {
     datasets: datasets,
@@ -161,12 +161,12 @@ function init_pool_charts() {
       $('.time').text("Last Reading: " + Watcher.pool_data[Watcher.pool_data.length-1].time);
     }
   });
-  $.ajax('/pool_readings/stats', {
-    dataType: "json",
-    success: function(data) {
-      set_stats("all", data);
-    }
-  });
+  // $.ajax('/pool_readings/stats', {
+  //   dataType: "json",
+  //   success: function(data) {
+  //     set_stats("all", data);
+  //   }
+  // });
 }
 
 /* must be own function; if $.ajax is in
@@ -186,7 +186,9 @@ function init_worker_chart(id) {
   $.ajax('/workers/' + id + '/stats', {
     dataType: "json",
     success: function(data) {
-      set_stats(id, data);
+      // set_stats(id, data);
+      $('.worker[data-id="' + id + '"]').find('.current')
+        .text('(' + data.tthps.current + ' now; '+ data.tthps.day + ' day)');
     }
   });
 }
@@ -223,7 +225,7 @@ function init_all_workers_chart() {
       },
       options: chart_options()
     });
-  }, 10000);
+  }, 3000);
 }
 
 function chart_options() {
@@ -232,8 +234,13 @@ function chart_options() {
     scales: {
       xAxes: [{
         display: true,
+        sacleShowLabels: false,
         gridLines: {
           color: chart_colors.gray
+        },
+        ticks: {
+          stepSize: 60,
+          maxTicksLimit: 24
         }
       }],
       yAxes: [{
@@ -247,7 +254,7 @@ function chart_options() {
 }
 
 function init_charts() {
-  init_df();
+  // init_df();
   init_pool_charts();
   init_worker_charts();
   init_all_workers_chart();
@@ -286,7 +293,7 @@ function init_refresh() {
 
 $('document').ready(function() {
   Chart.defaults.global.defaultFontColor = chart_colors.gray;
-  Chart.defaults.global.defaultFontSize  = 18;
+  Chart.defaults.global.defaultFontSize  = 11;
   init_refresh();
   // set_carousel();
 
