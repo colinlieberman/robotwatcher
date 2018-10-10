@@ -1,65 +1,24 @@
 body {
   background-color: #000;
   color: #0ff;
-  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
-.summary {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  th, td {
-    font-size: 24px;
-  }
-}
-
-tbody {
-  th, td {
-    text-align: right;
-  }
-}
-
-::-webkit-scrollbar {
-  display: none;
-}
-
-h1, h2, .graph, .time, .current {
-  text-align: center;
-}
-
-.space {
-  /* looks terrible on my machine; but good on the large display */
-  position: absolute;
-}
-
-div.stats {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.time {
-  font-size: 48px;
-}
-
-h1 {
-  font-size: 64px;
-}
-
-.section {
-  padding-top: 20px;
-}
-
-table.stats {
-  margin: auto;
-}
-
-canvas {
-  margin: auto;
-}
-
-.month {
+.graph {
+  height: 300px;
   canvas {
-    max-width: 1000px;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.card {
+  width: 25%;
+  table {
+    margin: auto;
   }
 }

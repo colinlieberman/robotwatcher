@@ -288,7 +288,7 @@ $('document').ready(function() {
   Chart.defaults.global.defaultFontColor = chart_colors.gray;
   Chart.defaults.global.defaultFontSize  = 18;
   init_refresh();
-  set_carousel();
+  // set_carousel();
 
   /* something's crapping everything out, chart js and all the datapoints, maybe?
      reload the whole show every hour

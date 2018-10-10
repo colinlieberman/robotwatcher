@@ -1,7 +1,7 @@
-.space
+.space.card
   %pre.df
 
-.summary
+.summary.card
   %table
     %thead
       %tr
@@ -26,45 +26,44 @@
         %td.day
         %td.uptime
 
-.charts
-  .section{"data-id": "all"}
+.section.card{"data-id": "all"}
+  .stats
+    = render "shared/stats", target: PoolReading
+
+.section.card{"data-id": "all"}
+  %h1
+    All Workers
+    .current
+  .time
+  .graph
+    %canvas{id: "all-workers-chart"}
+    -# = image_tag PoolReading.graph
+  -# .graph
+  -#   %canvas{id: "all-works-week", style: "height: 600px;"}
+
+.section.card
+  %h1
+    Workers Compared
+  .time
+  .graph
+    %canvas{id: "workers"}
+
+- @workers.each do |worker|
+  .worker.card
     %h1
-      All Workers
+      = worker.name
       .current
     .time
-    .graph
-      %canvas{id: "all-workers-chart", style: "height: 600px;"}
-      -# = image_tag PoolReading.graph
-    -# .graph
-    -#   %canvas{id: "all-works-week", style: "height: 600px;"}
-    .stats
-      = render "shared/stats", target: PoolReading
-
-  .section
-    %h1
-      Workers Compared
-    .time
-    .graph
-      %canvas{id: "workers", style: "height: 600px;"}
-
-  - @workers.each do |worker|
     .section{"data-id": worker.id}
-      %h1
-        = worker.name
-        .current
-      .time
       .graph
-        %canvas{id: "worker-#{worker.id}", style: "height: 600px;"}
-      .stats
-        = render "shared/stats", target: worker
+        %canvas{id: "worker-#{worker.id}"}
 
     .section.month{"data-id": "#{worker.id}-month"}
-      %h1
-        = worker.name
-        %br
-        Past Month
       .graph
-        %canvas{id: "worker-#{worker.id}-month", style: "height: 600px;"}
+        %canvas{id: "worker-#{worker.id}-month"}
+
+    .stats
+      = render "shared/stats", target: worker
 
 :javascript
   var Watcher = #{JSON.generate(empty_watcher).html_safe};
