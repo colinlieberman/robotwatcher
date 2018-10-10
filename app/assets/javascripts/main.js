@@ -1,13 +1,14 @@
 "use strict";
 
 var chart_colors = {
-  pink: "rgb(255, 180, 200)",
-  orange: "rgb(255, 180, 0)",
+  red: "rgb(255, 0, 0)",
+  purple: "rgb(180, 90, 255)",
   teal: "rgb(0, 128, 255)",
   green: "rgb(0, 255, 0)",
   white: "rgb(255, 255, 255)",
   yellow: "rgb(255, 255, 128)",
-  red: "rgb(255, 0, 0)",
+  orange: "rgb(255, 180, 0)",
+  pink: "rgb(200, 90, 200)",
   blue: "rgb(0, 0, 255)",
   gray: "rgb(128, 128, 128)"
 };
@@ -93,8 +94,8 @@ function init_chart(canvas, chart_data) {
   }
 
   datasets.push(        {
-    backgroundColor: chart_colors.pink,
-    borderColor: chart_colors.pink,
+    backgroundColor: chart_colors.purple,
+    borderColor: chart_colors.purple,
     /* hack, if it's a month chart, test by data size */
     showLine: chart_data.length > 30 ? false : true,
     data: chart_data.map(function(d) { return parseFloat(d.rate); }),
