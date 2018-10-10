@@ -181,6 +181,7 @@ function init_worker_chart(id) {
       Watcher.workers[id] = data.all;
       init_chart($('#worker-' + id), Watcher.workers[id]);
       init_chart($('#worker-' + id + '-month'), data.month)
+      init_all_workers_chart();
     }
   });
   $.ajax('/workers/' + id + '/stats', {
@@ -210,22 +211,15 @@ function init_df() {
 }
 
 function init_all_workers_chart() {
-  /* wait a bit on initial load for other data to load */
-  setTimeout(function() {
-    /* time stamps look like they line up pretty well, if
-       there are any problems I can fix that with how the
-       data is written
-    */
-    var datasets = data_all_workers();
-    var workers_chart = new Chart($('#workers'), {
-      type: 'line',
-      data: {
-        labels: datasets.labels,
-        datasets: datasets.datasets
-      },
-      options: chart_options()
-    });
-  }, 3000);
+  var datasets = data_all_workers();
+  var workers_chart = new Chart($('#workers'), {
+    type: 'line',
+    data: {
+      labels: datasets.labels,
+      datasets: datasets.datasets
+    },
+    options: chart_options()
+  });
 }
 
 function chart_options() {
@@ -257,32 +251,22 @@ function init_charts() {
   // init_df();
   init_pool_charts();
   init_worker_charts();
-  init_all_workers_chart();
 }
 
 function set_carousel() {
-  var $sections = $('.section');
-  var n_sections = $sections.length;
-  var curr_section = 0;
+  var $cards = $('.section');
+  var n_cards = $cards.length;
+  var curr_card = 0;
 
-  var rotate_section = function() {
-    // $sections[curr_section++].scrollIntoView();
-    $($sections[curr_section++]).hide();
-
-    if(curr_section == n_sections) {
-      curr_section = 0;
+  var rotate_card = function() {
+    if(curr_card == n_cards) {
+      curr_card = 0;
     }
-
-    $($sections[curr_section]).show();
-    setTimeout(rotate_section, 5000);
+    $cards[curr_card++].scrollIntoView({behavior: "smooth", block: "start"});
+    setTimeout(rotate_card, 5000);
   };
 
-  /* pause for data to load, then hide everything */
-  setTimeout(function() {
-    $sections.hide();
-    $sections.first().show();
-    rotate_section();
-  }, 5000);
+  setTimeout(rotate_card, 5000);
 }
 
 function init_refresh() {
@@ -295,7 +279,7 @@ $('document').ready(function() {
   Chart.defaults.global.defaultFontColor = chart_colors.gray;
   Chart.defaults.global.defaultFontSize  = 11;
   init_refresh();
-  // set_carousel();
+  set_carousel();
 
   /* something's crapping everything out, chart js and all the datapoints, maybe?
      reload the whole show every hour
