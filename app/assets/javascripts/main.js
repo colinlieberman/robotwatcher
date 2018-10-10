@@ -2,11 +2,11 @@
 
 var chart_colors = {
   red: "rgb(255, 0, 0)",
-  purple: "rgb(180, 90, 255)",
+  purple: "rgb(100, 60, 200)",
   teal: "rgb(0, 128, 255)",
   green: "rgb(0, 255, 0)",
   white: "rgb(255, 255, 255)",
-  yellow: "rgb(255, 255, 128)",
+  yellow: "rgb(255, 255, 200)",
   orange: "rgb(255, 180, 0)",
   pink: "rgb(200, 90, 200)",
   blue: "rgb(0, 0, 255)",
