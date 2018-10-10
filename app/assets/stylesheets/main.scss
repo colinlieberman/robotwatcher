@@ -7,6 +7,10 @@ body {
   justify-content: space-evenly;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .graph {
   height: 300px;
   canvas {
