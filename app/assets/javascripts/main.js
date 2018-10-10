@@ -161,12 +161,13 @@ function init_pool_charts() {
       $('.time').text("Last Reading: " + Watcher.pool_data[Watcher.pool_data.length-1].time);
     }
   });
-  // $.ajax('/pool_readings/stats', {
-  //   dataType: "json",
-  //   success: function(data) {
-  //     set_stats("all", data);
-  //   }
-  // });
+  $.ajax('/pool_readings/stats', {
+    dataType: "json",
+    success: function(data) {
+      $('.section[data-id="all"]').find('.current')
+        .text('(' + data.tthps.current + ' now; '+ data.tthps.day + ' day)');
+    }
+  });
 }
 
 /* must be own function; if $.ajax is in
